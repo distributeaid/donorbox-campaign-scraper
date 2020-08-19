@@ -25,7 +25,7 @@ jobs:
       - name: Scrape
         run: |
           mkdir dist
-          node scrape.js > dist/${{ env.DONORBOX_CAMPAIGN }}.json
+          node --unhandled-rejections=strict scrape.js > dist/${{ env.DONORBOX_CAMPAIGN }}.json
       - name: Publish latest release to GitHub pages
         if: contains(github.ref, 'saga')
         run: |
