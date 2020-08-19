@@ -1,0 +1,21 @@
+pull_request_rules:
+  - name: Automatic merge when all status checks pass
+    conditions:
+      - status-success=security/snyk (Distribute Aid)
+      - "#approved-reviews-by>=1"
+    actions:
+      merge:
+        method: rebase
+        rebase_fallback: squash
+        bot_account: distributeaid-ci
+      label:
+        add:
+          - mergify
+      rebase:
+        bot_account: distributeaid-ci
+  - name: Automatically approve security PRs
+    conditions:
+      - author~=^(snyk-bot|dependabot\[bot\])$
+    actions:
+      review:
+        message: Automatically approved because PR is by a trusted service
