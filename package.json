@@ -1,0 +1,48 @@
+{
+  "name": "@distributeaid/donorbox-campaign-scraper",
+  "version": "0.0.0-development",
+  "description": "Scrape the public donation page and extract key data about a campaign",
+  "main": "scrape.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/distributeaid/donorbox-campaign-scraper.git"
+  },
+  "keywords": [
+    "donorbox",
+    "api",
+    "campaign",
+    "Distribute Aid"
+  ],
+  "author": "Distribute Aid | https://distributeaid.org/",
+  "license": "AGPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/distributeaid/donorbox-campaign-scraper/issues"
+  },
+  "homepage": "https://github.com/distributeaid/donorbox-campaign-scraper#readme",
+  "dependencies": {
+    "jsdom": "^16.4.0",
+    "node-fetch": "^2.6.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{md,json,yaml,yml,js}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-angular": "^9.1.2",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}

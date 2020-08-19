@@ -1,0 +1,40 @@
+name: Build and Release
+
+on: push
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  DONORBOX_CAMPAIGN: ${{ secrets.DONORBOX_CAMPAIGN }}
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+      - name: Keep npm cache around to speed up installs
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci --no-audit
+      - name: Scrape
+        run: |
+          mkdir dist
+          node scrape.js > dist/${{ env.DONORBOX_CAMPAIGN }}.json
+      - name: Publish latest release to GitHub pages
+        if: contains(github.ref, 'saga')
+        run: |
+          echo "machine github.com login authtoken password ${GITHUB_TOKEN}" > ~/.netrc
+          git config --global user.email "actions@example.com"
+          git config --global user.name "GitHub Actions"
+          cd dist
+          git init
+          git add ${{ env.DONORBOX_CAMPAIGN }}.json
+          git commit -m 'latest update'
+          git remote add origin https://github.com/${GITHUB_REPOSITORY}.git
+          git push -f origin HEAD:gh-pages
