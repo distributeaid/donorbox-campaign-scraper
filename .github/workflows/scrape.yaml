@@ -1,13 +1,18 @@
 name: Build and Release
 
-on: push
+on:
+  push:
+    branches:
+      - saga
+  schedule:
+    - cron: "0 * * * *"
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   DONORBOX_CAMPAIGN: ${{ secrets.DONORBOX_CAMPAIGN }}
 
 jobs:
-  main:
+  scrape:
     runs-on: ubuntu-latest
 
     steps:
