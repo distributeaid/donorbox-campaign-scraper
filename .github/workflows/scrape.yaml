@@ -30,7 +30,7 @@ jobs:
       - name: Scrape
         run: |
           mkdir dist
-          node --unhandled-rejections=strict scrape.js > dist/${{ env.DONORBOX_CAMPAIGN }}.json
+          node --unhandled-rejections=strict scrape.js > dist/progress.json
       - name: Publish latest release to GitHub pages
         if: contains(github.ref, 'saga')
         run: |
@@ -39,7 +39,7 @@ jobs:
           git config --global user.name "GitHub Actions"
           cd dist
           git init
-          git add ${{ env.DONORBOX_CAMPAIGN }}.json
+          git add progress.json
           git commit -m 'latest update'
           git remote add origin https://github.com/${GITHUB_REPOSITORY}.git
           git push -f origin HEAD:gh-pages
