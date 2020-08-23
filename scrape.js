@@ -3,7 +3,7 @@ const JSDOM = require("jsdom").JSDOM;
 
 const campaign = process.env.DONORBOX_CAMPAIGN;
 
-fetch(`https://donorbox.org/${campaign}`)
+fetch(`https://donorbox.org/embed/${campaign}?only_donation_meter=true`)
   .then((res) => res.text())
   .then((page) => {
     const jsdom = new JSDOM(page);
