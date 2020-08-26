@@ -13,9 +13,9 @@ pull_request_rules:
           - mergify
       rebase:
         bot_account: distributeaid-ci
-  - name: Automatically approve security PRs
+  - name: Automatically approve trusted service PRs
     conditions:
-      - author~=^(snyk-bot|dependabot\[bot\])$
+      - author~=^(snyk-bot|dependabot\[bot\]|renovate\[bot\])$
     actions:
       review:
         message: Automatically approved because PR is by a trusted service
