@@ -21,7 +21,7 @@
   "homepage": "https://github.com/distributeaid/donorbox-campaign-scraper#readme",
   "dependencies": {
     "jsdom": "^16.4.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.1"
   },
   "husky": {
     "hooks": {
